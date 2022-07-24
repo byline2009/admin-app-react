@@ -1,0 +1,17 @@
+.mtest {
+  --mtest-main: #4285f4;
+  --rmsc-hover: #f1f3f5;
+  --rmsc-selected: #e2e6ea;
+  --rmsc-border: #ccc;
+  --rmsc-gray: #aaa;
+  --rmsc-bg: #fff;
+  --rmsc-p: 10px; /* Spacing */
+  --rmsc-radius: 4px; /* Radius */
+  --rmsc-h: 38px; /* Height */
+}
+
+.mtest .dropdown-container {
+  border: 1px solid #e4e6ef !important;
+  padding-top: 0.1rem;
+  padding-bottom: 0.1rem;
+}

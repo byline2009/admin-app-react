@@ -1,17 +1,34 @@
 import React from 'react'
-import ReactDOM from 'react-dom/client'
-import './index.css'
-import App from './App'
-import reportWebVitals from './reportWebVitals'
+import ReactDOM from 'react-dom'
+import {Provider} from 'react-redux'
+import {PersistGate} from 'redux-persist/integration/react'
+import store, {persistor} from './setup/redux/Store'
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
+import './index.css'
+import './styles/global.scss'
+import reportWebVitals from './reportWebVitals'
+import {AppRoutes} from './app/routing/AppRoutes'
+import * as _redux from './setup'
+import APIV2 from './utils/api/ApiV2'
+import {createRoot} from 'react-dom/client'
+const container = document.getElementById('root')
+const root = createRoot(container!) // createRoot(container!) if you use TypeScript
+_redux.setupAxiosV2(APIV2, store)
+
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <Provider store={store}>
+    <PersistGate persistor={persistor} loading={<div>Loading...</div>}>
+      <AppRoutes />
+    </PersistGate>
+  </Provider>
 )
-//check github
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals()
+
+// ReactDOM.render(
+//   <Provider store={store}>
+//     {/* Asynchronously persist redux stores and show `SplashScreen` while it's loading. */}
+//     <PersistGate persistor={persistor} loading={<div>Loading...</div>}>
+//       <AppRoutes />
+//     </PersistGate>
+//   </Provider>,
+//   document.getElementById('root')
+// )
